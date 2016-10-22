@@ -13,7 +13,7 @@ kernel_json = {
     "argv": [sys.executable,
              "-m", "psysh_kernel",
              "-f", "{connection_file}"],
-    "display_name": "Psysh",
+    "display_name": "PsySH",
     "mimetype": "text/x-php",
     "language": "php",
     "name": "psysh",

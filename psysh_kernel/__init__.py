@@ -1,3 +1,3 @@
-"""An Psysh kernel for Jupyter"""
+"""An PsySH kernel for Jupyter"""
 
 __version__ = '0.1.1'

@@ -15,11 +15,11 @@ from . import __version__
 
 
 class PsyshKernel(ProcessMetaKernel):
-    implementation = 'Psysh Kernel'
+    implementation = 'PsySH Kernel'
     implementation_version = __version__,
     language = 'php'
     language_version = __version__,
-    banner = "Psysh Kernel",
+    banner = "PsySH Kernel",
     language_info = {
         'mimetype': 'text/x-php',
         'name': 'psysh',
@@ -46,7 +46,7 @@ class PsyshKernel(ProcessMetaKernel):
                 self._executable = 'psysh'
                 return self._executable
             else:
-                msg = ('Psysh executable not found, please add to path or set'
+                msg = ('PsySH executable not found, please add to path or set'
                        '"PSYSH_EXECUTABLE" environment variable')
                 raise OSError(msg)
         else:
@@ -61,7 +61,7 @@ class PsyshKernel(ProcessMetaKernel):
         return self._banner
 
     def makeWrapper(self):
-        """Start an Psysh process and return a :class:`REPLWrapper` object.
+        """Start an PsySH process and return a :class:`REPLWrapper` object.
         """
         if os.name == 'nt':
             orig_prompt = u('>>>')
