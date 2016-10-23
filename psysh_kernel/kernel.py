@@ -76,7 +76,7 @@ class PsyshKernel(ProcessMetaKernel):
         executable = self.executable
 
         wrapper = REPLWrapper(executable, orig_prompt, change_prompt,
-                prompt_emit_cmd=prompt_cmd)
+                prompt_emit_cmd=prompt_cmd, echo=True)
         wrapper.child.linesep = '\n'
         return wrapper
 
