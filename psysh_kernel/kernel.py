@@ -37,7 +37,7 @@ class PsyshKernel(ProcessMetaKernel):
         executable = os.environ.get('PSYSH_EXECUTABLE', None)
         if not executable or not which(executable):
             if which('psysh'):
-                self._executable = 'psysh --no-color'
+                self._executable = 'psysh'
                 return self._executable
             else:
                 msg = ('PsySH executable not found, please add to path or set'
