@@ -2,14 +2,8 @@ from __future__ import print_function
 
 from metakernel import MetaKernel, ProcessMetaKernel, REPLWrapper, u
 from metakernel.pexpect import which
-from IPython.display import Image, SVG
 import subprocess
-from xml.dom import minidom
 import os
-import shutil
-import sys
-import tempfile
-
 
 from . import __version__
 
@@ -43,7 +37,7 @@ class PsyshKernel(ProcessMetaKernel):
         executable = os.environ.get('PSYSH_EXECUTABLE', None)
         if not executable or not which(executable):
             if which('psysh'):
-                self._executable = 'psysh'
+                self._executable = 'psysh --no-color'
                 return self._executable
             else:
                 msg = ('PsySH executable not found, please add to path or set'
@@ -63,20 +57,10 @@ class PsyshKernel(ProcessMetaKernel):
     def makeWrapper(self):
         """Start an PsySH process and return a :class:`REPLWrapper` object.
         """
-        if os.name == 'nt':
-            orig_prompt = u('>>>')
-            prompt_cmd = u('print chr(3);')
-            change_prompt = None
-        else:
-            orig_prompt = u('>>>')
-            prompt_cmd = None
-            change_prompt = None
-
 
         executable = self.executable
 
-        wrapper = REPLWrapper(executable, orig_prompt, change_prompt,
-                prompt_emit_cmd=prompt_cmd, echo=True)
+        wrapper = REPLWrapper(executable, u('>>>'), None, continuation_prompt_regex=u('\.\.\.'), echo=True)
         wrapper.child.linesep = '\n'
         return wrapper
 
@@ -93,10 +77,10 @@ class PsyshKernel(ProcessMetaKernel):
         resp = super(PsyshKernel, self).do_execute_direct('help %s' % obj)
         return str(resp)
 
-    def get_completions(self, info):
-        """
-        Get completions from kernel based on info dict.
-        """
-        cmd = 'completion_matches("%s")' % info['obj']
-        resp = super(PsyshKernel, self).do_execute_direct(cmd)
-        return str(resp).splitlines()
+    # def get_completions(self, info):
+    #     """
+    #     Get completions from kernel based on info dict.
+    #     """
+    #     cmd = '$sh = new \Psy\Shell(); $sh->autocomplete("%s");' % info['obj']
+    #     resp = super(PsyshKernel, self).do_execute_direct(cmd)
+    #     return str(resp).splitlines()
