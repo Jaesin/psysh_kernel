@@ -3,6 +3,7 @@ from __future__ import print_function
 from metakernel import MetaKernel, ProcessMetaKernel, REPLWrapper, u
 from metakernel.pexpect import which
 import subprocess
+import re
 import os
 
 from . import __version__
@@ -17,7 +18,8 @@ class PsyshKernel(ProcessMetaKernel):
     language_info = {
         'mimetype': 'text/x-php',
         'name': 'psysh',
-        'file_extension': '.php',
+        'language': 'php',
+        'file_extension': 'php',
         "version": __version__,
         'help_links': MetaKernel.help_links,
     }
@@ -65,7 +67,8 @@ class PsyshKernel(ProcessMetaKernel):
         return wrapper
 
     def do_execute_direct(self, code):
-        super(PsyshKernel, self).do_execute_direct(code, self.Print)
+        # Strip out any php tags.
+        super(PsyshKernel, self).do_execute_direct(re.sub(r"<\?php[ \t]*", '', code), self.Print)
 
     def get_kernel_help_on(self, info, level=0, none_on_fail=False):
         obj = info.get('help_obj', '')
