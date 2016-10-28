@@ -68,7 +68,7 @@ class PsyshKernel(ProcessMetaKernel):
 
     def do_execute_direct(self, code):
         # Strip out any php tags.
-        super(PsyshKernel, self).do_execute_direct(re.sub(r"<\?php[ \t]*", '', code), self.Print)
+        super(PsyshKernel, self).do_execute_direct(re.sub(r"^<\?php[ \t]*\r?\n", '', code), self.Print)
 
     def get_kernel_help_on(self, info, level=0, none_on_fail=False):
         obj = info.get('help_obj', '')
