@@ -8,18 +8,18 @@ and [PsySH](http://psysh.org/) installed.
 To install:
 
 ```bash
-pip install psysh_kernel
-python -m psysh_kernel.install
+python -m pip install psysh_kernel
+python -m psysh_kernel install
 ```
 
 To use it, run one of:
 
 ```bash
 
-ipython notebook
+jupyter notebook
 # In the notebook interface, select Psysh from the 'New' menu
-ipython qtconsole --kernel psysh
-ipython console --kernel psysh
+jupyter qtconsole --kernel psysh
+jupyter console --kernel psysh
 ```
 
 This is based on MetaKernel <http://pypi.python.org/pypi/metakernel> 

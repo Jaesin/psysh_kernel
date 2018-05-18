@@ -1,0 +1,9 @@
+{
+    "argv": ["python",
+             "-m", "psysh_kernel",
+             "-f", "{connection_file}"],
+    "display_name": "PsySH",
+    "mimetype": "text/x-php",
+    "language": "php",
+    "name": "psysh"
+}

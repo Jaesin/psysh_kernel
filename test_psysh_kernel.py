@@ -20,5 +20,7 @@ class PsyshKernelTests(jkt.KernelTests):
 
     code_page_something = "is_dir(__DIR__);"
 
+# @TODO Add a test for state retention.
+
 if __name__ == '__main__':
     unittest.main()
