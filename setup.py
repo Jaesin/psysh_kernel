@@ -25,6 +25,8 @@ setup(
           '%s/../assets/logo-32x32.png' % DISTNAME,
           '%s/../assets/logo-64x64.png' % DISTNAME,
       ])],
+  package_data={DISTNAME: ['%s/kernel.json']},
+  include_package_data=True,
   classifiers=[
     'Intended Audience :: Developers/Presenters',
     'License :: OSI Approved :: BSD License',
