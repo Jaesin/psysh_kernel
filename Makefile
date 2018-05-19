@@ -1,24 +1,32 @@
-# Note: This is meant for developer use only
+# Note: This is meant for psysh_kernel developer use only
 .PHONY: all clean test release
 
-export TEST_ARGS=--exe -v --with-doctest
-export NAME=psysh_kernel
-export VERSION=`python -c "import $(NAME); print($(NAME).__version__)"`
+export NAME=`python setup.py --name 2>/dev/null`
+export VERSION=`python setup.py --version 2>/dev/null`
 
 all: clean
-	flit install --symlink
+	python setup.py install
 
 clean:
 	rm -rf build
 	rm -rf dist
-	find . -name "*.pyc" -o -name "*.py,cover"| xargs rm -f
 
 test: clean
-	python test_psysh_kernel.py
+	python -m pip install jupyter_kernel_test nbconvert
+	composer global require psy/psysh:@stable
+	python -V 2>&1 | grep "Python 3" && python test_psysh_kernel.py || echo "Skipping unit test"
+	jupyter nbconvert --to notebook --execute --ExecutePreprocessor.kernel_name=psysh --ExecutePreprocessor.timeout=60 --stdout psysh_kernel.ipynb > /dev/null;
+	make clean
 
-release: clean
+release: test clean
 	pip install wheel
-	flit wheel --upload
+	python setup.py register
+	python setup.py bdist_wheel --universal
+	python setup.py sdist
+	git commit -a -m "Release $(VERSION)"; true
 	git tag v$(VERSION)
 	git push origin --all
 	git push origin --tags
+	twine upload dist/*
+	printf '\nUpgrade psysh_kernel-feedstock with release and sha256 sum:'
+	shasum -a 256 dist/*.tar.gz
