@@ -1,28 +1,28 @@
 # Note: This is meant for psysh_kernel developer use only
 .PHONY: all clean test release
 
-export NAME=`python setup.py --name 2>/dev/null`
-export VERSION=`python setup.py --version 2>/dev/null`
+export NAME=`python3 setup.py --name 2>/dev/null`
+export VERSION=`python3 setup.py --version 2>/dev/null`
 
 all: clean
-	python setup.py install
+	python3 setup.py install
 
 clean:
 	rm -rf build
 	rm -rf dist
 
 test: clean
-	python -m pip install jupyter_kernel_test nbconvert
+	python3 -m pip install jupyter_kernel_test nbconvert
 	composer global require psy/psysh:@stable
-	python -V 2>&1 | grep "Python 3" && python test_psysh_kernel.py || echo "Skipping unit test"
+	python3 -V 2>&1 | grep "Python3 3" && python3 test_psysh_kernel.py || echo "Skipping unit test"
 	jupyter nbconvert --to notebook --execute --ExecutePreprocessor.kernel_name=psysh --ExecutePreprocessor.timeout=60 --stdout psysh_kernel.ipynb > /dev/null;
 	make clean
 
 release: test clean
-	pip install wheel
-	python setup.py register
-	python setup.py bdist_wheel --universal
-	python setup.py sdist
+	pip3 install wheel
+	python3 setup.py register
+	python3 setup.py bdist_wheel --universal
+	python3 setup.py sdist
 	git commit -a -m "Release $(VERSION)"; true
 	git tag v$(VERSION)
 	git push origin --all
