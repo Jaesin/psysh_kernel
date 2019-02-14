@@ -36,7 +36,6 @@ setup(
     'Programming Language :: Python :: 3.7',
     'Topic :: Scientific/Engineering',
     'Topic :: Software Development',
-    'Topic :: Presentation',
-    'Topic :: System :: Shells',
+    'Topic :: System :: System Shells',
   ]
 )

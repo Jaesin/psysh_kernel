@@ -20,7 +20,6 @@ test: clean
 
 release: test clean
 	pip3 install wheel
-	python3 setup.py register
 	python3 setup.py bdist_wheel --universal
 	python3 setup.py sdist
 	git commit -a -m "Release $(VERSION)"; true
