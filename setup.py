@@ -2,7 +2,7 @@
 """
 from setuptools import setup
 
-version = '0.1.2'
+version = '0.1.3'
 
 DISTNAME = 'psysh_kernel'
 
@@ -28,13 +28,12 @@ setup(
   package_data={DISTNAME: ['%s/kernel.json']},
   include_package_data=True,
   classifiers=[
-    'Intended Audience :: Developers/Presenters',
+    'Intended Audience :: Developers',
     'License :: OSI Approved :: BSD License',
     'Operating System :: OS Independent',
     'Programming Language :: Python',
     'Programming Language :: Python :: 2.7',
-    'Programming Language :: Python :: 3.3',
-    'Programming Language :: Python :: 3.4',
+    'Programming Language :: Python :: 3.7',
     'Topic :: Scientific/Engineering',
     'Topic :: Software Development',
     'Topic :: Presentation',
