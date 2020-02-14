@@ -46,6 +46,7 @@ class PsyshKernel(ProcessMetaKernel):
     _php_engine = None
     _language_version = None
     _shell_version = None
+    _shell_location = None
 
     @property
     def language_version(self):
@@ -62,6 +63,13 @@ class PsyshKernel(ProcessMetaKernel):
         return self._shell_version
 
     @property
+    def shell_location(self):
+        if self._shell_location is None:
+            self._shell_location = self.php_engine.eval('get_included_files()[0];', silent=True)[9:-8]
+
+        return self._shell_location
+
+    @property
     def language_info(self):
         return {'mimetype': 'text/x-php',
                 'name': 'php',
@@ -74,10 +82,10 @@ class PsyshKernel(ProcessMetaKernel):
         msg = '''PsySH Kernel version: %s
 Kernel location: %r
 
-PsySH version: %s
+PsySH version: %s (%r)
 PHP version: %s.
 '''
-        return msg % (__version__, __file__, self.shell_version, self.language_version)
+        return msg % (__version__, __file__, self.shell_version, self.shell_location, self.language_version)
 
     @property
     def php_engine(self):
