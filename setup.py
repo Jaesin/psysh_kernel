@@ -18,8 +18,8 @@ setup(
   license='BSD',
   py_modules=[DISTNAME],
   packages=[DISTNAME],
-  requires=["metakernel (>=0.20.11)", "jupyter_client (>=4.3.0)", "ipykernel"],
-  install_requires=["metakernel>=0.20.11", "jupyter_client>=4.3.0", "ipykernel"],
+  requires=["metakernel (>=0.24.3)", "jupyter_client (>=4.3.0)", "ipykernel"],
+  install_requires=["metakernel>=0.24.3", "jupyter_client>=4.3.0", "ipykernel"],
   data_files=[('share/jupyter/kernels/octave', [
           '%s/kernel.json' % DISTNAME,
           '%s/../assets/logo-32x32.png' % DISTNAME,
